@@ -1,0 +1,10 @@
+<?php
+$novapostNumber = $block->getData('row')['novapost_number'];
+$orderId = $block->getData('row')['entity_id'];
+$orderUrl = $block->getUrl('sales/order/view', ['order_id' => $orderId]);
+
+if ($novapostNumber) {
+    echo '<a href="' . $orderUrl . '">' . $novapostNumber . '</a>';
+} else {
+    echo __('N/A');
+}

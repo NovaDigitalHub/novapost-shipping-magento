@@ -1,0 +1,93 @@
+{
+    "np_settlement": {
+        "column": {
+            "entity_id": true,
+            "name": true,
+            "region_id": true,
+            "external_id": true,
+            "country_code": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "np_region": {
+        "column": {
+            "entity_id": true,
+            "area_id": true,
+            "name": true,
+            "external_id": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "np_area": {
+        "column": {
+            "entity_id": true,
+            "country_code": true,
+            "name": true,
+            "external_id": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "np_warehouse": {
+        "column": {
+            "entity_id": true,
+            "short_name": true,
+            "external_id": true,
+            "source": true,
+            "country_code": true,
+            "settlement_id": true,
+            "address": true,
+            "number": true,
+            "status": true,
+            "customer_service_available": true,
+            "division_category": true,
+            "public_phones": true,
+            "internal_phones": true,
+            "responsible_person": true,
+            "partner": true,
+            "owner_division": true,
+            "latitude": true,
+            "longitude": true,
+            "distance": true,
+            "max_weight_place_sender": true,
+            "max_length_place_sender": true,
+            "max_width_place_sender": true,
+            "max_height_place_sender": true,
+            "max_weight_place_recipient": true,
+            "max_length_place_recipient": true,
+            "max_width_place_recipient": true,
+            "max_height_place_recipient": true,
+            "place_max_weight_allowed": true,
+            "prohibited_sending": true,
+            "prohibited_issuance": true,
+            "max_cost_place": true,
+            "max_declared_cost_place": true,
+            "work_schedule": true,
+            "name": true,
+            "division_id": true,
+            "postcode": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "NP_WAREHOUSE_EXTERNAL_ID": true
+        }
+    },
+    "quote_address": {
+        "column": {
+            "np_settlement_external_id": true,
+            "np_warehouse_external_id": true,
+            "np_geo_address": true,
+            "np_geo_address_building": true
+        }
+    },
+    "sales_order": {
+        "column": {
+            "novapost_number": true
+        }
+    }
+}

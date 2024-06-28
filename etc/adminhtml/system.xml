@@ -1,0 +1,238 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="novapost_tab" translate="label" sortOrder="200">
+            <label>Nova Post</label>
+        </tab>
+        <section id="novapost_credentials" translate="label" type="text" sortOrder="1" showInDefault="1"
+                 showInWebsite="1" showInStore="1">
+            <label>Shipping synchronize</label>
+            <tab>novapost_tab</tab>
+            <resource>Novapost_Shipping::config</resource>
+            <group id="sync" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Nova Post synchronize</label>
+                <field id="sync_warehouse" translate="label button_label" sortOrder="15" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <frontend_model>Novapost\Shipping\Block\System\Config\Warehouse</frontend_model>
+                </field>
+            </group>
+        </section>
+
+        <section id="carriers">
+            <group id="novapost" translate="label" type="text" sortOrder="150" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>NOVA POST</label>
+                <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1"
+                       showInStore="1" canRestore="1">
+                    <label>Enabled for Checkout</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="api_key" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1"
+                       canRestore="1">
+                    <label>API Key (apiKey)</label>
+                </field>
+                <field id="api_url" translate="label comment" type="select" sortOrder="30" showInDefault="1"
+                       showInWebsite="1" canRestore="1">
+                    <label>API SERVER</label>
+                    <source_model>Novapost\Shipping\Model\Source\ServerType</source_model>
+                </field>
+                <field id="company_tin" translate="label" type="text" sortOrder="40" showInDefault="1"
+                       showInWebsite="1" canRestore="1">
+                    <label>Company Tin</label>
+                    <comment>The tax identification number or equivalent identifier (EDRPOU, TIN, NIP) for the sender's company, essential for legal and customs documentation if the sender is a legal entity.</comment>
+                </field>
+                <field id="company_name" translate="label" type="text" sortOrder="50" showInDefault="1"
+                       showInWebsite="1" canRestore="1">
+                    <label>Company Name</label>
+                    <comment>The official name of the sender's company. This field is used when the sender is a business entity, helping to identify the sending organization in documentation and records. Insert "Private person" if the sender is not a company.</comment>
+                </field>
+                <field id="payer_contact_number" translate="label" type="text" sortOrder="60" showInDefault="1"
+                       showInWebsite="1" canRestore="1">
+                    <label>Payer Contract Number</label>
+                    <comment>This is the contract number or tax identification number (EDRPOU) of the party accountable for the payment of delivery services in non-cash transactions. It is a required field when the 'payerType' is set to 'ThirdPerson', specifying the contract that outlines the payment obligations. Ensure the entry is accurate, as it is essential for processing the payment.</comment>
+                </field>
+                <field id="phone" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1"
+                       canRestore="1">
+                    <label>Phone</label>
+                </field>
+                <field id="email" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1"
+                       canRestore="1">
+                    <label>Email</label>
+                </field>
+                <field id="name" translate="label" type="text" sortOrder="90" showInDefault="1" showInWebsite="1"
+                       canRestore="1">
+                    <label>Surname Name</label>
+                </field>
+                <field id="country_code" translate="label" type="select" sortOrder="100" showInDefault="1"
+                       showInWebsite="1" canRestore="1">
+                    <label>Country</label>
+                    <source_model>Magento\Directory\Model\Config\Source\Country</source_model>
+                </field>
+                <field id="sender_type" translate="label" type="select" sortOrder="110" showInDefault="1"
+                       showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Send from</label>
+                    <source_model>Novapost\Shipping\Model\Source\SenderType</source_model>
+                </field>
+                <field id="settlement" translate="label" type="select" sortOrder="120" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>City</label>
+                    <source_model>Novapost\Shipping\Model\Source\Settlement</source_model>
+                    <frontend_model>Novapost\Shipping\Block\Adminhtml\Form\Render\Config\Settlement</frontend_model>
+                    <depends>
+                        <field id="sender_type">2</field>
+                    </depends>
+                </field>
+                <field id="division_id" translate="label" type="select" sortOrder="130" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Warehouse</label>
+                    <source_model>Novapost\Shipping\Model\Source\Warehouse</source_model>
+                    <frontend_model>Novapost\Shipping\Block\Adminhtml\Form\Render\Config\Warehouse</frontend_model>
+                    <depends>
+                        <field id="sender_type">2</field>
+                    </depends>
+                </field>
+                <field id="city" translate="label" type="text" sortOrder="140" showInDefault="1" showInWebsite="1"
+                       canRestore="1">
+                    <label>City</label>
+                    <depends>
+                        <field id="sender_type">1</field>
+                    </depends>
+                </field>
+                <field id="region" translate="label" type="text" sortOrder="150" showInDefault="1" showInWebsite="1"
+                       canRestore="1">
+                    <label>Region</label>
+                    <depends>
+                        <field id="sender_type">1</field>
+                    </depends>
+                </field>
+                <field id="street" translate="label" type="text" sortOrder="160" showInDefault="1" showInWebsite="1"
+                       canRestore="1">
+                    <label>Street</label>
+                    <depends>
+                        <field id="sender_type">1</field>
+                    </depends>
+                </field>
+                <field id="post_code" translate="label" type="text" sortOrder="170" showInDefault="1" showInWebsite="1"
+                       canRestore="1">
+                    <label>Post Code</label>
+                    <depends>
+                        <field id="sender_type">1</field>
+                    </depends>
+                </field>
+                <field id="building" translate="label" type="text" sortOrder="180" showInDefault="1" showInWebsite="1"
+                       canRestore="1">
+                    <label>Building</label>
+                    <depends>
+                        <field id="sender_type">1</field>
+                    </depends>
+                </field>
+                <field id="flat" translate="label" type="text" sortOrder="190" showInDefault="1" showInWebsite="1"
+                       canRestore="1">
+                    <label>Flat</label>
+                    <depends>
+                        <field id="sender_type">1</field>
+                    </depends>
+                </field>
+                <field id="block" translate="label" type="text" sortOrder="200" showInDefault="1" showInWebsite="1"
+                       canRestore="1">
+                    <label>Block</label>
+                    <depends>
+                        <field id="sender_type">1</field>
+                    </depends>
+                </field>
+                <field id="note" translate="label" type="text" sortOrder="210" showInDefault="1" showInWebsite="1"
+                       canRestore="1">
+                    <label>Note</label>
+                    <depends>
+                        <field id="sender_type">1</field>
+                    </depends>
+                </field>
+                <field id="novapost_shipping_warehouse_title" translate="label" type="text" sortOrder="220"
+                       showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Title for warehouse delivery</label>
+                </field>
+                <field id="novapost_shipping_warehouse_price" translate="label" type="text" sortOrder="230"
+                       showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Default price for warehouse delivery</label>
+                </field>
+                <field id="novapost_shipping_courier_title" translate="label" type="text" sortOrder="240"
+                       showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Title for courier delivery</label>
+                </field>
+                <field id="novapost_shipping_courier_price" translate="label" type="text" sortOrder="250"
+                       showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Default price for courier delivery</label>
+                </field>
+                <field id="size" translate="label" type="select" sortOrder="260" showInDefault="1"
+                       showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Size</label>
+                    <source_model>Novapost\Shipping\Model\Source\Size</source_model>
+                </field>
+                <field id="height" translate="label" type="text" sortOrder="270" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Height</label>
+                    <depends>
+                        <field id="size">1</field>
+                    </depends>
+                </field>
+                <field id="depth" translate="label" type="text" sortOrder="280" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Depth</label>
+                    <depends>
+                        <field id="size">1</field>
+                    </depends>
+                </field>
+                <field id="width" translate="label" type="text" sortOrder="290" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Width</label>
+                    <depends>
+                        <field id="size">1</field>
+                    </depends>
+                </field>
+                <field id="allowed_methods" translate="label" type="multiselect" sortOrder="300" showInDefault="1"
+                       showInWebsite="1" showInStore="0" canRestore="1">
+                    <label>Delivery variable</label>
+                    <source_model>Novapost\Shipping\Model\Source\Method</source_model>
+                    <can_be_empty>1</can_be_empty>
+                    <comment>Use Ctrl for multiselect.</comment>
+                </field>
+                <field id="measurement" translate="label" type="select" sortOrder="310" showInDefault="1" showInWebsite="1"
+                       canRestore="1">
+                    <label>Measurement</label>
+                    <source_model>Novapost\Shipping\Model\Source\Measurement</source_model>
+                    <comment>The unit of measurement for the item quantity, such as pieces, kilograms, meters, etc., standardizing the way quantities are reported.</comment>
+                </field>
+                <field id="parcel_description" translate="label" type="text" sortOrder="320" showInDefault="1" showInWebsite="1"
+                       canRestore="1">
+                    <label>Parcel description</label>
+                    <comment>This field requires a concise description of the contents within the shipment, providing essential information on the nature of the items enclosed. This description aids in the logistics process, offering a clear understanding of the package contents for transportation planning and customs clearance. The summary should include details like the type of items, their purpose, and any other relevant information that describes the contents. It’s crucial for ensuring that the shipment complies with shipping regulations and facilitates smooth customs processing. Additionally, this field supports data in Unicode encoding, allowing for the inclusion of special characters and symbols using the \uXXXX format. This feature is particularly useful for languages that use non-Latin characters, ensuring accurate representation of item descriptions across diverse linguistic contexts.</comment>
+                </field>
+                <field id="sallowspecific" translate="label" type="select" sortOrder="1900" showInDefault="1"
+                       showInWebsite="1" canRestore="1">
+                    <label>Ship to Applicable Countries</label>
+                    <frontend_class>shipping-applicable-country</frontend_class>
+                    <source_model>Magento\Shipping\Model\Config\Source\Allspecificcountries</source_model>
+                </field>
+                <field id="specificcountry" translate="label" type="multiselect" sortOrder="1910" showInDefault="1"
+                       showInWebsite="1">
+                    <label>Ship to Specific Countries</label>
+                    <source_model>Magento\Directory\Model\Config\Source\Country</source_model>
+                    <can_be_empty>1</can_be_empty>
+                </field>
+                <field id="showmethod" translate="label" type="select" sortOrder="1940" showInDefault="1"
+                       showInWebsite="1">
+                    <label>Show Method if Not Applicable</label>
+                    <frontend_class>shipping-skip-hide</frontend_class>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="sort_order" translate="label" type="text" sortOrder="2000" showInDefault="1"
+                       showInWebsite="1">
+                    <label>Sort Order</label>
+                    <validate>validate-number validate-zero-or-greater</validate>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

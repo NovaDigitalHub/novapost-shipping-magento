@@ -1,0 +1,29 @@
+<div style="margin-top: 0px" class="input-block-level" data-bind="visible: selectedMethodCode()!='' && getCountry()">
+    <label class="label-np-help" data-bind="i18n: 'Enter address for delivery'"></label>
+    <select style="width:100%" class="select" data-bind="
+    attr: {
+        name: inputName,
+        id: uid,
+        'aria-describedby': getDescriptionId(),
+        'aria-required': required,
+        'aria-invalid': error() ? true : 'false',
+        placeholder: placeholder
+    },
+    hasFocus: focused,
+    optgroup: options,
+    value: value,
+    valueUpdate: 'keyup',
+    optionsCaption: caption,
+    optionsValue: 'value',
+    optionsText: 'label',
+    afterRender: function (element) {
+            select2(element);
+        },
+    optionsAfterRender: function(option, item) {
+        if (item && item.disabled) {
+            ko.applyBindingsToNode(option, {attr: {disabled: true}}, item);
+        }
+    }"
+    >
+    </select>
+</div>

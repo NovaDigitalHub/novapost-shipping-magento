@@ -1,0 +1,35 @@
+<div style="margin: 10px 0; width: 100%" class="field settlement" data-bind="visible: selectedMethodCode()!=''">
+    <label class="label">
+        <span data-bind="i18n: 'City'"></span>
+    </label>
+    <div class="control">
+        <select class="select" data-bind="
+            attr: {
+                name: inputName,
+                id: uid,
+                disabled: disabled,
+                'aria-describedby': getDescriptionId(),
+                'aria-required': required,
+                'aria-invalid': error() ? true : 'false',
+                placeholder: placeholder
+            },
+            hasFocus: focused,
+            optgroup: options,
+            value: value,
+            optionsCaption: caption,
+            optionsValue: 'value',
+            optionsText: 'label',
+            afterRender: function (element) {
+                select2(element);
+                },
+            optionsAfterRender: function(option, item) {
+                if (item && item.disabled) {
+                    ko.applyBindingsToNode(option, {attr: {disabled: true}}, item);
+                };
+            },
+            event: {change: loadWarehouses(event)
+            }"
+        >
+        </select>
+    </div>
+</div>

@@ -1,0 +1,60 @@
+<?php
+/* @var $block Novapost\Shipping\Block\System\Config\Warehouse */
+?>
+
+<script>
+    require([
+        'jquery',
+        'Magento_Ui/js/modal/alert'
+    ], function ($, alert) {
+        function npWarehouseSync(currentPage = 1) {
+            new Ajax.Request('<?= $escaper->escapeJs($escaper->escapeUrl($block->getAjaxUrl())) ?>', {
+                parameters: {
+                    page: currentPage
+                },
+                onSuccess: function (transport) {
+                    if (transport.responseText.isJSON()) {
+                        var response = transport.responseText.evalJSON();
+
+                        if (response.error) {
+                            alert({content: response.message});
+                        } else if (currentPage < response.pages) {
+                            npWarehouseSync(parseFloat(response.currentPage) + 5)
+                        } else {
+                            alert({content: response.message});
+                        }
+                    }
+                },
+                onFailure: function (transport) {
+                    alert({content: 'Error, please try latter'});
+                }
+            });
+        }
+        window.npWarehouseSync = npWarehouseSync;
+    });
+</script>
+
+<div class="pp-buttons-container">
+    <button
+        onclick="npWarehouseSync(); return false;"
+        type="button"
+        id="<?= $escaper->escapeHtmlAttr($block->getHtmlId()) ?>">
+        <span><?= $escaper->escapeHtml(__($block->getButtonLabel())) ?></span>
+    </button>
+</div>
+<br/>
+<div class="sync-description">
+    <p>This page provides the functionality to synchronize branch data with the Nova Post server.</p>
+    <br/>
+    <h2>"Synchronize Now" Button</h2>
+    <p>Click the <strong>"Synchronize Now"</strong> button to manually initiate the data synchronization process. It is important to note that this process can take a significant amount of time depending on the volume of data and network speed. Please be patient and do not close the page until the synchronization is complete.</p>
+    <br/>
+    <h2>Automatic Synchronization</h2>
+    <p>In addition to manual synchronization, data is automatically updated once a day through a configured cron job. This ensures that the information is up-to-date without requiring manual intervention.</p>
+    <br/>
+    <h2>Process Information</h2>
+    <ul>
+        <li><strong>Manual Synchronization</strong>: This process is initiated by clicking the "Synchronize Now" button and may take some time. It is recommended to perform manual synchronization during off-peak hours to avoid any impact on site performance.</li>
+        <li><strong>Automatic Update</strong>: The configured cron job runs the synchronization process daily at 00:00 (default time). This ensures up-to-date information on Nova Post branches without user involvement.</li>
+    </ul>
+</div>

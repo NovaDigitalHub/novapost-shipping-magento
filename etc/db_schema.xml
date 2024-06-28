@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="np_settlement" resource="default" engine="innodb" comment="Nova Post settlements">
+        <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Entity ID"/>
+        <column xsi:type="int" name="external_id" nullable="true"/>
+        <column xsi:type="varchar" name="country_code" nullable="true" length="255"/>
+        <column xsi:type="varchar" name="region_id" nullable="true" length="255"/>
+        <column xsi:type="varchar" name="name" nullable="true" length="255"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+<!--        <constraint xsi:type="unique" referenceId="NP_REF_UNIQUE_SETTLEMENT">-->
+<!--            <column name="name"/>-->
+<!--        </constraint>-->
+    </table>
+    <table name="np_region" resource="default" engine="innodb" comment="Nova Post regions">
+        <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Entity ID"/>
+        <column xsi:type="int" name="external_id" nullable="true"/>
+        <column xsi:type="varchar" name="area_id" nullable="true" length="255"/>
+        <column xsi:type="varchar" name="name" nullable="true" length="255"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+    </table>
+    <table name="np_area" resource="default" engine="innodb" comment="Nova Post parent regions">
+        <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Entity ID"/>
+        <column xsi:type="int" name="external_id" nullable="true"/>
+        <column xsi:type="varchar" name="country_code" nullable="true" length="255"/>
+        <column xsi:type="varchar" name="name" nullable="true" length="255"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+    </table>
+    <table name="np_warehouse" resource="default" engine="innodb" comment="Nova Post warehouses">
+        <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Entity ID"/>
+        <column xsi:type="int" name="division_id" nullable="false" comment="Division ID"/>
+        <column xsi:type="varchar" name="name" nullable="true" length="255"/>
+        <column xsi:type="varchar" name="short_name" nullable="true" length="255"/>
+        <column xsi:type="varchar" name="external_id" nullable="true" length="255"/>
+        <column xsi:type="varchar" name="source" nullable="true" length="255"/>
+        <column xsi:type="varchar" name="country_code" nullable="true" length="255"/>
+        <column xsi:type="int" name="settlement_id" nullable="true"/>
+        <column xsi:type="varchar" name="address" nullable="true" length="255"/>
+        <column xsi:type="int" name="number" nullable="true"/>
+        <column xsi:type="varchar" name="status" nullable="true" length="128"/>
+        <column xsi:type="tinyint" name="customer_service_available" nullable="false" unsigned="false" default="0"/>
+        <column xsi:type="varchar" name="division_category" nullable="true" length="255"/>
+        <column xsi:type="text" name="public_phones" nullable="true"/>
+        <column xsi:type="text" name="internal_phones" nullable="true"/>
+        <column xsi:type="varchar" name="responsible_person" nullable="true" length="255"/>
+        <column xsi:type="varchar" name="partner" nullable="true" length="255"/>
+        <column xsi:type="varchar" name="owner_division" nullable="true" length="255"/>
+        <column xsi:type="double" name="latitude" nullable="false"/>
+        <column xsi:type="double" name="longitude" nullable="false"/>
+        <column xsi:type="varchar" name="distance" nullable="true" length="255"/>
+        <column xsi:type="varchar" name="postcode" nullable="true" length="64"/>
+        <column xsi:type="int" name="max_weight_place_sender" nullable="true"/>
+        <column xsi:type="int" name="max_length_place_sender" nullable="true"/>
+        <column xsi:type="int" name="max_width_place_sender" nullable="true"/>
+        <column xsi:type="int" name="max_height_place_sender" nullable="true"/>
+        <column xsi:type="int" name="max_weight_place_recipient" nullable="true"/>
+        <column xsi:type="int" name="max_length_place_recipient" nullable="true"/>
+        <column xsi:type="int" name="max_width_place_recipient" nullable="true"/>
+        <column xsi:type="int" name="max_height_place_recipient" nullable="true"/>
+        <column xsi:type="int" name="place_max_weight_allowed" nullable="true"/>
+        <column xsi:type="tinyint" name="prohibited_sending" nullable="false" unsigned="false" default="0"/>
+        <column xsi:type="tinyint" name="prohibited_issuance" nullable="false" unsigned="false" default="0"/>
+        <column xsi:type="int" name="max_cost_place" nullable="true"/>
+        <column xsi:type="int" name="max_declared_cost_place" nullable="true"/>
+        <column xsi:type="text" name="work_schedule" nullable="true"/>
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <constraint xsi:type="unique" referenceId="NOVAPOST_EXTERNAL_ID_UN_WAREHOUSE">
+            <column name="external_id"/>
+        </constraint>
+    </table>
+    <table name="quote_address">
+        <column xsi:type="varchar" name="np_settlement_external_id" nullable="true" length="255"
+                comment="NovaPost settlement id"/>
+        <column xsi:type="int" name="np_warehouse_external_id" nullable="true" comment="Novapost warehouse id"/>
+        <column xsi:type="varchar" name="np_geo_address" nullable="true" length="255" comment="Nova Post geo address"/>
+        <column xsi:type="varchar" name="np_geo_address_building" nullable="true" length="255" comment="Nova Post building"/>
+    </table>
+    <table name="sales_order">
+        <column xsi:type="varchar" name="novapost_number" nullable="true" length="255"
+                comment="NovaPost tracking number"/>
+    </table>
+</schema>

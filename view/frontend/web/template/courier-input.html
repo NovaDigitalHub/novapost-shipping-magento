@@ -1,0 +1,21 @@
+<div style="margin: 10px 0; width: 100%" class="field courier" data-bind="visible: selectedMethodCode()!='' && getCountry()">
+    <label class="label">
+        <span data-bind="i18n: 'Enter address for delivery'"></span>
+    </label>
+    <div class="control">
+        <input class="input-text" type="text" data-bind="
+        value: value,
+        valueUpdate: valueUpdate,
+        hasFocus: focused,
+        attr: {
+            name: inputName,
+            cols: cols,
+            rows: rows,
+            'aria-describedby': noticeId,
+            placeholder: placeholder,
+            id: uid,
+            disabled: disabled
+        }"
+        >
+    </div>
+</div>

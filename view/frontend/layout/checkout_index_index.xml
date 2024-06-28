@@ -1,0 +1,146 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Novapost_Shipping::css/select2.css"></css>
+    </head>
+    <body>
+        <referenceBlock name="checkout.root">
+            <arguments>
+                <argument name="jsLayout" xsi:type="array">
+                    <item name="components" xsi:type="array">
+                        <item name="checkout" xsi:type="array">
+                            <item name="children" xsi:type="array">
+                                <item name="steps" xsi:type="array">
+                                    <item name="children" xsi:type="array">
+                                        <item name="shipping-step" xsi:type="array">
+                                            <item name="children" xsi:type="array">
+                                                <item name="step-config" xsi:type="array">
+                                                    <item name="children" xsi:type="array">
+                                                        <item name="shipping-rates-validation" xsi:type="array">
+                                                            <item name="children" xsi:type="array">
+                                                                <item name="novapost-rates-validation" xsi:type="array">
+                                                                    <item name="component" xsi:type="string">Novapost_Shipping/js/view/shipping-rates-validation</item>
+                                                                </item>
+                                                            </item>
+                                                        </item>
+                                                    </item>
+                                                </item>
+                                                <item name="shippingAddress" xsi:type="array">
+                                                    <item name="config" xsi:type="array">
+                                                        <item name="shippingMethodItemTemplate" xsi:type="string">Novapost_Shipping/novapost_shipping_warehouse</item>
+                                                    </item>
+                                                    <item name="children" xsi:type="array">
+                                                        <item name="shipping-address-fieldset" xsi:type="array">
+                                                            <item name="children" xsi:type="array">
+
+<!--                                                                <item name="city_id" xsi:type="array">-->
+<!--                                                                    <item name="component" xsi:type="string">Novapost_Shipping/js/view/settlement-id</item>-->
+<!--                                                                    <item name="config" xsi:type="array">-->
+<!--                                                                        <item name="template" xsi:type="string">ui/form/field</item>-->
+<!--&lt;!&ndash;                                                                        <item name="elementTmpl" xsi:type="string">Novapost_Shipping/settlement</item>&ndash;&gt;-->
+<!--                                                                        <item name="customScope" xsi:type="string">shippingAddress</item>-->
+<!--&lt;!&ndash;                                                                        <item name="imports" xsi:type="array">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                                            <item name="setOptions" xsi:type="string">index = checkoutProvider:dictionaries.city</item>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                                        </item>&ndash;&gt;-->
+<!--                                                                        <item name="visible" xsi:type="boolean">true</item>-->
+<!--                                                                    </item>-->
+<!--                                                                    <item name="dataScope" xsi:type="string">shippingAddress.np_warehouse_external_id</item>-->
+<!--                                                                    <item name="provider" xsi:type="string">checkoutProvider</item>-->
+<!--                                                                    <item name="sortOrder" xsi:type="string">50</item>-->
+<!--                                                                    <item name="label" xsi:type="string">City hidden</item>-->
+<!--&lt;!&ndash;                                                                    <item name="validation" xsi:type="array">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                                        <item name="required-entry" xsi:type="boolean">true</item>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                                    </item>&ndash;&gt;-->
+<!--                                                                </item>-->
+                                                                <item name="country_id" xsi:type="array">
+                                                                    <item name="config" xsi:type="array">
+                                                                        <item name="visible" xsi:type="boolean">true</item>
+                                                                    </item>
+                                                                </item>
+                                                                <item name="postcode" xsi:type="array">
+                                                                    <item name="visible" xsi:type="boolean">true</item>
+                                                                </item>
+                                                            </item>
+                                                        </item>
+                                                        <item name="shippingAdditional" xsi:type="array">
+                                                            <item name="component" xsi:type="string">uiComponent</item>
+                                                            <item name="displayArea" xsi:type="string">shippingAdditional</item>
+                                                            <item name="children" xsi:type="array">
+                                                                <item name="additional_block" xsi:type="array">
+                                                                    <item name="component" xsi:type="string">Novapost_Shipping/js/view/additional</item>
+                                                                </item>
+                                                                <item name="city_id" xsi:type="array">
+                                                                    <item name="targetName" xsi:type="string">index = np_settlement_external_id</item>
+                                                                    <item name="component" xsi:type="string">Novapost_Shipping/js/view/settlement</item>
+                                                                    <item name="displayArea" xsi:type="string">novapost-checkout-form-fields-warehouse</item>
+                                                                    <item name="config" xsi:type="array">
+                                                                        <item name="template" xsi:type="string">Novapost_Shipping/settlement</item>
+                                                                    </item>
+                                                                    <item name="dataScope" xsi:type="string">shippingAddress.np_settlement_external_id</item>
+                                                                    <item name="provider" xsi:type="string">checkoutProvider</item>
+                                                                    <item name="sortOrder" xsi:type="string">1</item>
+                                                                    <item name="label" xsi:type="string">Settlement</item>
+                                                                </item>
+                                                                <item name="novapost-form-storage-warehouse" xsi:type="array">
+                                                                    <item name="targetName" xsi:type="string">index = np_warehouse_external_id</item>
+                                                                    <item name="component" xsi:type="string">Novapost_Shipping/js/view/warehouse</item>
+                                                                    <item name="displayArea" xsi:type="string">novapost-checkout-form-fields-warehouse</item>
+                                                                    <item name="sortOrder" xsi:type="string">2</item>
+                                                                    <item name="dataScope" xsi:type="string">shippingAddress.np_warehouse_external_id</item>
+                                                                    <item name="provider" xsi:type="string">checkoutProvider</item>
+                                                                    <item name="label" xsi:type="string">Warehouse</item>
+                                                                    <item name="config" xsi:type="array">
+                                                                        <item name="template" xsi:type="string">Novapost_Shipping/warehouse</item>
+                                                                    </item>
+                                                                </item>
+                                                                <item name="novapost-form-storage-courier" xsi:type="array">
+                                                                    <item name="targetName" xsi:type="string">index = np_geo_address</item>
+                                                                    <item name="component" xsi:type="string">Novapost_Shipping/js/view/courier</item>
+                                                                    <item name="displayArea" xsi:type="string">novapost-checkout-form-fields-courier</item>
+                                                                    <item name="sortOrder" xsi:type="string">3</item>
+                                                                    <item name="dataScope" xsi:type="string">shippingAddress.np_geo_address</item>
+                                                                    <item name="provider" xsi:type="string">checkoutProvider</item>
+                                                                    <item name="label" xsi:type="string">Courier</item>
+                                                                    <item name="config" xsi:type="array">
+                                                                        <item name="template" xsi:type="string">Novapost_Shipping/courier</item>
+                                                                    </item>
+                                                                </item>
+                                                                <item name="novapost-form-storage-courier-input" xsi:type="array">
+                                                                    <item name="targetName" xsi:type="string">index = np_geo_address_input</item>
+                                                                    <item name="component" xsi:type="string">Novapost_Shipping/js/view/courier-input</item>
+                                                                    <item name="displayArea" xsi:type="string">novapost-checkout-form-fields-courier</item>
+                                                                    <item name="sortOrder" xsi:type="string">3</item>
+                                                                    <item name="dataScope" xsi:type="string">shippingAddress.np_geo_address_input</item>
+                                                                    <item name="provider" xsi:type="string">checkoutProvider</item>
+                                                                    <item name="label" xsi:type="string">Courier</item>
+                                                                    <item name="config" xsi:type="array">
+                                                                        <item name="template" xsi:type="string">Novapost_Shipping/courier-input</item>
+                                                                    </item>
+                                                                </item>
+                                                                <item name="novapost-form-storage-courier-building" xsi:type="array">
+                                                                    <item name="targetName" xsi:type="string">index = np_geo_address_building</item>
+                                                                    <item name="component" xsi:type="string">Novapost_Shipping/js/view/courier-building</item>
+                                                                    <item name="displayArea" xsi:type="string">novapost-checkout-form-fields-courier</item>
+                                                                    <item name="sortOrder" xsi:type="string">4</item>
+                                                                    <item name="dataScope" xsi:type="string">shippingAddress.np_geo_address_building</item>
+                                                                    <item name="provider" xsi:type="string">checkoutProvider</item>
+                                                                    <item name="label" xsi:type="string">Building</item>
+                                                                    <item name="config" xsi:type="array">
+                                                                        <item name="template" xsi:type="string">Novapost_Shipping/courier-building</item>
+                                                                    </item>
+                                                                </item>
+                                                            </item>
+                                                        </item>
+                                                    </item>
+                                                </item>
+                                            </item>
+                                        </item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+            </arguments>
+        </referenceBlock>
+    </body>
+</page>
