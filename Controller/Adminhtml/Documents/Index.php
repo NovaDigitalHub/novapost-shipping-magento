@@ -5,6 +5,7 @@ namespace Novapost\Shipping\Controller\Adminhtml\Documents;
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\Controller\Result\RawFactory;
+use Magento\Framework\Message\ManagerInterface;
 use Novapost\Shipping\Model\Service\Transfer;
 use Novapost\Shipping\Helper\Data as ConfigHelper;
 
@@ -26,20 +27,28 @@ class Index extends Action
     private $configHelper;
 
     /**
+     * @var ManagerInterface
+     */
+    protected $messageManager;
+
+    /**
      * Index constructor.
      *
      * @param Context $context
      * @param RawFactory $resultRawFactory
+     * @param ManagerInterface $messageManager
      * @param Transfer $transfer
      * @param ConfigHelper $configHelper
      */
     public function __construct(
         Context $context,
         RawFactory $resultRawFactory,
+        ManagerInterface $messageManager,
         Transfer $transfer,
         ConfigHelper $configHelper
     ) {
         $this->resultRawFactory = $resultRawFactory;
+        $this->messageManager = $messageManager;
         $this->transfer = $transfer;
         $this->configHelper = $configHelper;
 
@@ -57,8 +66,11 @@ class Index extends Action
 
         $auth = $this->transfer->auth();
         if ($auth->getData('errors')) {
-            echo __('Auth error');
-            return ;
+            $this->messageManager->addErrorMessage(__('Auth error'));
+            $resultRedirect = $this->resultRedirectFactory->create();
+            $resultRedirect->setPath('sales/order');
+
+            return $resultRedirect;
         }
 
         $trackNumber = $this->getRequest()->getParam('number');
