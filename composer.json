@@ -1,5 +1,5 @@
 {
-    "name": "novapost/np-shipping-magento",
+    "name": "nova-poshta-global/np-shipping-magento",
     "version": "1.0.0",
     "description": "Nova Post eCommerce for Magento 2",
     "type": "magento2-module",
